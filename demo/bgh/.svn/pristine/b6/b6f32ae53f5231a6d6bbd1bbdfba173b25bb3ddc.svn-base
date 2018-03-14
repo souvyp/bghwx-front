@@ -1,0 +1,56 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import router from './router'
+import App from './App'
+import MintUI from 'mint-ui'
+import VueCookie from 'js-cookie'
+import 'mint-ui/lib/style.css'
+
+import wx from 'weixin-js-sdk'
+import axios from 'axios'
+import YDUI from 'vue-ydui'; /* 相当于import YDUI from 'vue-ydui/ydui.rem.js' */
+import 'vue-ydui/dist/ydui.rem.css';
+import './styles/index.scss'
+
+Vue.use(YDUI)
+
+
+Vue.use(MintUI)
+
+Vue.prototype.$ajax = axios
+
+Vue.config.productionTip = false
+router.beforeEach((to, from, next) => {
+  if ((!VueCookie.get('user') && !store.state.userInfo)) {
+    // 第一次访问
+    console.log('授权登录')
+    // 跳转到微信授权页面，微信授权地址通过服务端获得
+    axios.post('/api/login').then(res => {
+      var data = res.data
+      if (data.code === 100) {
+        window.location.href = data.data
+      }
+    })
+  } else if (!store.state.userInfo) {
+    // 刷新页面，获取数据存入vuex
+    axios.get('/api/currentuser').then(res => {
+      if (res.data.code === 100) {
+        store.dispatch('setUserInfo', res.data.data)
+        next()
+      }
+    })
+    console.log('cookie生效期内登录')
+    next()
+  } else {
+    // 已经登录
+    console.log('已登录')
+    next()
+  }
+})
+
+/* eslint-disable no-new */
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app-box')

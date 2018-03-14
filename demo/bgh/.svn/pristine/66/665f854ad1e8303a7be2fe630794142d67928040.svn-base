@@ -1,0 +1,90 @@
+<template>
+	<!--融资签章(代申请)-->
+  <div class="receive-detail sigle-apply">
+  	<div>
+  		<mt-search v-model="value1" placeholder="出账单号" cancel-text="搜索" show='true'></mt-search>
+  	</div>
+  	<div class="card page-actionsheet">
+		<ul class="tab-ul">
+      		<li v-for="oneList in oneLists" class="tab-ul-li">
+      			<div class="li-row">
+      				<span>融资单号</span>
+      				<span class="cell-right">{{oneList.one}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>申请人</span>
+      				<span class="cell-right">{{oneList.two}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>应收单号</span>
+      				<span class="cell-right">{{oneList.three}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>申请日期</span>
+      				<span class="cell-right">{{oneList.four}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>申请融资金额</span>
+      				<span class="cell-right">{{oneList.five}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>实付金额</span>
+      				<span class="cell-right">{{oneList.six}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>状态</span>
+      				<span class="cell-right">{{oneList.seven}}</span>
+      			</div>
+      			<div class="li-row list-footer">
+      				<span>
+      					<mt-checklist
+						  v-model="value"
+						  :options="options">
+						</mt-checklist>
+      				</span>
+      				<span class="" >
+      					<mt-button    @click.native="signContract">申请融资</mt-button>
+      				</span>					
+				</div> 
+      		</li>
+       </ul>
+  	</div>
+  	<div class="btn-footer">
+  		<mt-button  type="primary" size="large"  @click.native="signContract">批量融资</mt-button>
+  	</div>
+  </div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			oneLists: [{
+				one: 'CJS1705002555',
+				two: '比干',
+				three: 'CJS1705002555',
+				four: '2018-09-08',
+				five: '0.00	',
+				six: '15,678.00',
+				seven: '未出账'
+			}],
+			value: [],
+			options: ['CJS1705002555']
+		}
+	},
+  created() {
+  },
+  methods: {
+  	signContract() {
+  		this.$router.push('/financingManager/finaQuerySignContract')
+  	}
+  }
+
+}
+
+</script>
+
+
+
+<style rel="stylesheet/scss" lang="scss" scoped="scoped" >
+	
+</style>

@@ -1,0 +1,46 @@
+<template>
+  <div class="app-container">
+  	<form class="form-login">
+  		  <div class="form-title">
+  		  	<span>账号登录aaa</span>
+  		  </div>
+  			<group>
+  				<x-input title="账号" v-model="userName" placeholder="请输入账号"></x-input>
+  				<x-input title="密码" v-model="userPwd" type="password" placeholder="请输入密码"></x-input>
+  		 </group>
+  		  <div  class="btn-login">
+		      <x-button  type="primary" @click.native="loginHandle">登录</x-button>
+		    </div>
+		    <div class="footer">
+		    	<span>忘记密码?</span>
+		    </div>
+  	</form>
+  </div>
+</template>
+
+<script>
+	import {  Group, XButton, XInput } from 'vux'
+export default {
+  name: 'login',
+  components: {
+      Group,
+      XInput,
+      XButton
+    },
+  data () {
+    return {
+       userName: undefined,
+       userPwd: undefined
+    }
+  },
+  methods: {
+		loginHandle() {
+			this.$router.push('/totalShowBox/receiveDetail')
+		}
+	}
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>

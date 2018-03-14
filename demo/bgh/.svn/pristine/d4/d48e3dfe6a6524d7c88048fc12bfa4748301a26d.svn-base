@@ -1,0 +1,41 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+const _import = require('./_import_production')
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: '登录',
+      component: _import('login')
+    },
+//  总览
+    {
+      path: '/totalShowBox/receiveDetail',
+      name: '应收池明细',
+      component: _import('totalShowBox/receiveDetail')
+    },
+//  融资管理
+    {
+      path: '/financingManager/financingApply',
+      name: '融资申请',
+      component: _import('financingManager/financingApply')
+    },
+    {
+      path: '/financingManager/financingSignContract',
+      name: '确认合同',
+      component: _import('financingManager/financingSignContract')
+    },
+    {
+      path: '/financingManager/addCreditApply',
+      name: '增量授信融资申请',
+      component: _import('financingManager/addCreditApply')
+    },
+    {
+      path: '/financingManager/addCreditSignContract',
+      name: '增量授信融资确认合同',
+      component: _import('financingManager/addCreditSignContract')
+    }
+  ]
+})

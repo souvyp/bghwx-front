@@ -1,0 +1,137 @@
+<template>
+	<!--融资申请-->
+  <div class="receive-detail financing-apply">
+  	<div>
+  		<ul class="tab-ul">
+      		<li class="tab-ul-li">
+      			<div class="li-row">
+      				<span>当前最大融资金额</span>
+      				<span class="cell-right">{{oneList.one}}元</span>
+      			</div>
+      		</li>
+        </ul>
+  	</div>
+  	<div class="card page-actionsheet">
+  		<mt-cell title="申请信息"></mt-cell>
+  		<mt-field label="申请总金额" placeholder="请输入申请融资总金额" type="number"></mt-field>
+  		<mt-cell @click.native="sheetVisible = true" title="还款方式" is-link>
+		  <span  >请选择还款方式</span>
+		</mt-cell>
+		
+		<ul class="tab-ul">
+      		<li class="tab-ul-li">
+      			<div class="li-row">
+      				<span>还款到期日</span>
+      				<span class="cell-right">{{oneList.one}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>融资入账账号</span>
+      				<span class="cell-right">{{oneList.two}}</span>
+      			</div>
+      		</li>
+        </ul>
+      <mt-actionsheet :actions="actions" v-model="sheetVisible" cancel-text=""></mt-actionsheet>
+  	</div>
+  	<div class="card">
+  		<mt-cell title="利息信息"></mt-cell>
+  		<ul class="tab-ul">
+      		<li v-for="twoList in twoLists" class="tab-ul-li">
+      			<div class="li-row">
+      				<span>利率</span>
+      				<span class="cell-right">{{twoList.one}}%</span>
+      			</div>
+      			<div class="li-row">
+      				<span>付款方</span>
+      				<span class="cell-right">{{twoList.two}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>前付/后付</span>
+      				<span class="cell-right">{{twoList.three}}</span>
+      			</div>
+      		</li>
+      	</ul>
+  	</div>
+  	<div class="card">
+  		<mt-cell title="基础费用信息"></mt-cell>
+  		<ul class="tab-ul">
+      		<li v-for="threeList in threeLists" class="tab-ul-li">
+      			<div class="li-row">
+      				<span>费用名称</span>
+      				<span class="cell-right">{{threeList.one}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>付款方</span>
+      				<span class="cell-right">{{threeList.two}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>前付/后付</span>
+      				<span class="cell-right">{{threeList.three}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>收费方式</span>
+      				<span class="cell-right">{{threeList.four}}</span>
+      			</div>
+      			<div class="li-row">
+      				<span>值</span>
+      				<span class="cell-right">{{threeList.five}}%</span>
+      			</div>
+      		</li>
+      	</ul>
+  	</div>
+	<div>
+		<mt-button  type="primary" size="large" @click.native="signContract">下一步</mt-button>
+	</div>   
+  </div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			sheetVisible: false,
+			oneList: {
+				one: '2018-01-10',
+				two: '1234567'
+			},
+			twoLists: [{
+				one: '7.50',
+				two: '卖方',
+				three: '后付'
+			}],
+			threeLists: [{
+				one: '卖方保理费',
+				two: '卖方',
+				three: '后付',
+				four: '比例',
+				five: '1.00'
+			}],
+			actions: [
+			{
+				name: '按季付息到期还本',
+				method: ''
+			},
+			{
+				name: '按月付息到期还本',
+				method: ''
+			},
+			{
+				name: '利随本清',
+				method: ''
+			}],
+		}
+	},
+  created() {
+  },
+  methods: {
+  	signContract() {
+  		this.$router.push('/financingManager/addCreditSignContract')
+  	}
+  }
+
+}
+
+</script>
+
+
+
+<style rel="stylesheet/scss" lang="scss" scoped="scoped" >
+</style>

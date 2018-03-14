@@ -1,0 +1,19 @@
+.form-login {
+    padding: 0 15px;
+    .form-title {
+        padding-top: 50px;
+        text-align: center;
+        font-size: 24px;
+    }
+    .btn-login {
+        margin: 20px auto;
+    }
+    .footer {
+        text-align: right;
+    }
+    .button.weui-btn, input.weui-btn {
+        width: 90%;
+    }
+    
+}
+

@@ -1,0 +1,176 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+const _import = require('./_import_production')
+Vue.use(Router)
+
+export default new Router({
+//	mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: '登录',
+      component: _import('login')
+    },
+//  总览(池模式)
+    {
+      path: '/totalShowBox/receiveDetail',
+      name: '应收池明细',
+      component: _import('totalShowBox/totalShow/receiveDetail')
+    },
+//  融资管理(池模式)
+    {
+      path: '/financingManager/financingApply',
+      name: '融资申请',
+      component: _import('totalShowBox/financingManager/financingApply')
+    },
+    {
+      path: '/financingManager/financingSignInfo',
+      name: '查看合同信息',
+      component: _import('totalShowBox/financingManager/financingSignInfo')
+    },
+    {
+      path: '/financingManager/financingSignContract',
+      name: '确认合同',
+      component: _import('totalShowBox/financingManager/financingSignContract')
+    },
+    {
+      path: '/financingManager/addCreditApply',
+      name: '增量授信融资申请',
+      component: _import('totalShowBox/financingManager/addCreditApply')
+    },
+    {
+      path: '/financingManager/addCreditSignInfo',
+      name: '增量授信查看合同信息',
+      component: _import('totalShowBox/financingManager/addCreditSignInfo')
+    },
+    {
+      path: '/financingManager/addCreditSignContract',
+      name: '增量授信融资确认合同',
+      component: _import('totalShowBox/financingManager/addCreditSignContract')
+    },
+    {
+      path: '/financingManager/finaAgentApply',
+      name: '融资签章(代申请)',
+      component: _import('totalShowBox/financingManager/finaAgentApply')
+    },
+    {
+      path: '/financingManager/finaAgentApplyInfo',
+      name: '查看合同信息(代申请)',
+      component: _import('totalShowBox/financingManager/finaAgentApplyInfo')
+    },
+    {
+      path: '/financingManager/finaAgentApplyContract',
+      name: '融资签章确认合同(代申请)',
+      component: _import('totalShowBox/financingManager/finaAgentApplyContract')
+    },
+    {
+      path: '/financingManager/repayApply',
+      name: '还款申请',
+      component: _import('totalShowBox/financingManager/repayApply')
+    },
+    {
+      path: '/financingManager/repayApplyDetail',
+      name: '还款申请详情',
+      component: _import('totalShowBox/financingManager/repayApplyDetail')
+    },
+//  查询管理(池模式)
+		{
+      path: '/queryManager/financingQuery',
+      name: '融资查询',
+      component: _import('totalShowBox/queryManager/financingQuery')
+    },
+    {
+      path: '/queryManager/repayQuery',
+      name: '还款查询',
+      component: _import('totalShowBox/queryManager/repayQuery')
+    },
+    {
+      path: '/queryManager/repayPlayQuery',
+      name: '还款计划查询',
+      component: _import('totalShowBox/queryManager/repayPlayQuery')
+    },
+    {
+      path: '/queryManager/cashExportQuery',
+      name: '尾款转出查询',
+      component: _import('totalShowBox/queryManager/cashExportQuery')
+    },
+    {
+      path: '/queryManager/finaQuerySignContract',
+      name: '融资查询确认合同',
+      component: _import('totalShowBox/queryManager/finaQuerySignContract')
+    },
+    //  总览(单笔模式)
+    {
+      path: '/totalShowSingle/receiveDetail',
+      name: '应收池明细',
+      component: _import('totalShowSingle/totalShow/receiveDetail')
+    },
+//  融资管理(单笔模式)
+    {
+      path: '/totalShowSingle/financingApply',
+      name: '融资申请',
+      component: _import('totalShowSingle/financingManager/financingApply')
+    },
+    {
+      path: '/totalShowSingle/financingSignInfo',
+      name: '查看合同信息',
+      component: _import('totalShowSingle/financingManager/financingSignInfo')
+    },
+    {
+      path: '/totalShowSingle/financingSignContract',
+      name: '确认合同',
+      component: _import('totalShowSingle/financingManager/financingSignContract')
+    },
+    {
+      path: '/totalShowSingle/finaAgentApply',
+      name: '融资签章(代申请)',
+      component: _import('totalShowSingle/financingManager/finaAgentApply')
+    },
+    {
+      path: '/totalShowSingle/finaAgentApplyInfo',
+      name: '融资签章(代申请)查看合同信息',
+      component: _import('totalShowSingle/financingManager/finaAgentApplyInfo')
+    },
+    {
+      path: '/totalShowSingle/finaAgentApplyContract',
+      name: '融资签章确认合同(代申请)',
+      component: _import('totalShowSingle/financingManager/finaAgentApplyContract')
+    },
+    {
+      path: '/totalShowSingle/repayApply',
+      name: '还款申请',
+      component: _import('totalShowSingle/financingManager/repayApply')
+    },
+    {
+      path: '/totalShowSingle/repayApplyDetail',
+      name: '还款申请详情',
+      component: _import('totalShowSingle/financingManager/repayApplyDetail')
+    },
+//  查询管理(单笔模式)
+		{
+      path: '/totalShowSingle/financingQuery',
+      name: '融资查询',
+      component: _import('totalShowSingle/queryManager/financingQuery')
+    },
+    {
+      path: '/totalShowSingle/repayQuery',
+      name: '还款查询',
+      component: _import('totalShowSingle/queryManager/repayQuery')
+    },
+    {
+      path: '/totalShowSingle/repayPlayQuery',
+      name: '还款计划查询',
+      component: _import('totalShowSingle/queryManager/repayPlayQuery')
+    },
+    {
+      path: '/totalShowSingle/cashExportQuery',
+      name: '尾款转出查询',
+      component: _import('totalShowSingle/queryManager/cashExportQuery')
+    },
+    {
+      path: '/totalShowSingle/finaQuerySignContract',
+      name: '融资查询确认合同',
+      component: _import('totalShowSingle/queryManager/finaQuerySignContract')
+    },
+  ]
+})

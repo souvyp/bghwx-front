@@ -1,0 +1,21 @@
+.receive-detail,.financing-apply {
+    .mint-button--small {
+        padding: 0;
+        width: 32%;
+        height: 35px;
+    }
+    .tab-ul-li {
+        list-style: none;
+        background: #fff;
+        padding: 11px 15px;
+        margin-bottom: 10px;
+        .li-row {
+            height: 35px;
+            line-height: 35px;
+        }
+        .cell-right {
+            float: right;
+            color: #888;
+        }
+    }
+}

@@ -1,0 +1,208 @@
+<template>
+  <div class="app-container">
+  	<form class="form-login">
+  		  <div class="form-title">
+  		  	<span>账号登录</span>
+  		  </div>
+  			<yd-cell-group>
+		        <yd-cell-item>
+		            <span slot="left">账号：</span>
+		            <yd-input slot="right"  v-model="userName" max="20" placeholder="请输入用户名"></yd-input>
+		        </yd-cell-item>
+		        <yd-cell-item class='row-pwd'>
+		            <span slot="left">密码：</span>
+		            <yd-input slot="right" type="password" v-model="userPwd" placeholder="请输入密码"></yd-input>
+		        </yd-cell-item>
+		    </yd-cell-group>
+  		  <div  class="btn-login">
+		      <x-button  type="primary" @click.native="loginHandle">Token_Access</x-button>
+		      <x-button  type="primary" @click.native="createMenu">生成菜单(池)</x-button>
+		      <x-button  type="primary" @click.native="createMenuSingle">生成菜单(单笔)</x-button>
+		    </div>
+		    <div class="footer">
+		    	<span>忘记密码?</span>
+		    </div>
+  	</form>
+  </div>
+</template>
+
+<script>
+	import {  Group, XButton, XInput } from 'vux'
+	import * as index from '@/api/index'
+export default {
+  name: 'login',
+  components: {
+      Group,
+      XInput,
+      XButton
+    },
+  data () {
+    return {
+       userName: undefined,
+       userPwd: undefined
+    }
+  },
+  mounted() {
+  	//this.createMenu()
+  },
+  methods: {
+		loginHandle() {
+			index.getObj(`/cgi-bin/token?grant_type=client_credential&appid=wx9e5cebeb227e21c0&secret=7330cc05f3eca43e0502d4e6dbcfbd3d`)
+			.then(response => {
+				this.access_token = response.data.access_token
+			})
+		},
+		createMenu() {
+			let locahost = `http://8h5842.natappfree.cc/?#`
+			let dataStrBox = `{
+									    "button": [
+									    		{
+									            "name": "首页", 
+									            "sub_button": [
+									                {
+									                    "type": "view", 
+									                    "name": "登录", 
+									                    "url": "${locahost}"
+									                }, 
+									                {
+													            "name": "总览", 
+													            "type": "view", 
+													            "url": "${locahost}/totalShowBox/receiveDetail"
+													        }
+									            ]
+									       },
+									        {
+									            "name": "融资管理", 
+									            "sub_button": [
+									                {
+									                    "type": "view", 
+									                    "name": "融资申请", 
+									                    "url": "${locahost}/financingManager/financingApply"
+									                }, 
+									                {
+									                    "type": "view", 
+									                    "name": "增量授信融资申请", 
+									                    "url": "${locahost}/financingManager/addCreditApply"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "融资签章(代申请)", 
+									                    "url": "${locahost}/financingManager/finaAgentApply"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "还款申请", 
+									                    "url": "${locahost}/financingManager/repayApply"
+									                }
+									            ]
+									        },
+									        {
+									            "name": "业务管理", 
+									            "sub_button": [
+									                {
+									                    "type": "view", 
+									                    "name": "融资查询", 
+									                    "url": "${locahost}/queryManager/financingQuery"
+									                }, 
+									                {
+									                    "type": "view", 
+									                    "name": "还款查询", 
+									                    "url": "${locahost}/queryManager/repayQuery"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "还款计划查询", 
+									                    "url": "${locahost}/queryManager/repayPlayQuery"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "尾款转出查询", 
+									                    "url": "${locahost}/queryManager/cashExportQuery"
+									                }
+									            ]
+									        }
+									    ]
+									}`
+			index.putObj(dataStrBox, `/cgi-bin/menu/create?access_token=${this.access_token}`)
+			.then(response => {
+				console.log('生成池菜单成功!')
+			})						 
+		},
+		createMenuSingle() {
+			let locahost = `http://8h5842.natappfree.cc/?#`
+			let dataStrSingle = `{
+									    "button": [
+									    		{
+									            "name": "首页", 
+									            "sub_button": [
+									                {
+									                    "type": "view", 
+									                    "name": "登录", 
+									                    "url": "${locahost}"
+									                }, 
+									                {
+													            "name": "总览", 
+													            "type": "view", 
+													            "url": "${locahost}/totalShowSingle/receiveDetail"
+													        }
+									            ]
+									       },
+									        {
+									            "name": "融资管理", 
+									            "sub_button": [
+									                {
+									                    "type": "view", 
+									                    "name": "融资申请（批量）", 
+									                    "url": "${locahost}/totalShowSingle/financingApply"
+									                }, 
+									                {
+									                    "type": "view", 
+									                    "name": "融资签章(代申请批量)", 
+									                    "url": "${locahost}/totalShowSingle/finaAgentApply"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "还款申请", 
+									                    "url": "${locahost}/totalShowSingle/repayApply"
+									                }
+									            ]
+									        },
+									        {
+									            "name": "查询管理", 
+									            "sub_button": [
+									                {
+									                    "type": "view", 
+									                    "name": "融资查询", 
+									                    "url": "${locahost}/totalShowSingle/financingQuery"
+									                }, 
+									                {
+									                    "type": "view", 
+									                    "name": "还款查询", 
+									                    "url": "${locahost}/totalShowSingle/repayQuery"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "还款计划查询", 
+									                    "url": "${locahost}/totalShowSingle/repayPlayQuery"
+									                },
+									                {
+									                    "type": "view", 
+									                    "name": "尾款转出查询", 
+									                    "url": "${locahost}/totalShowSingle/cashExportQuery"
+									                }
+									            ]
+									        }
+									    ]
+									}`
+			index.putObj(dataStrSingle, `/cgi-bin/menu/create?access_token=${this.access_token}`)
+			.then(response => {
+				console.log('生成单笔菜单成功!')
+			})	
+		}
+	}
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>

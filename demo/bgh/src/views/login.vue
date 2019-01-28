@@ -3,208 +3,157 @@
   	<form class="form-login">
   		  <div class="form-title">
   		  	<span>账号登录</span>
+			<svg-icon iconClass="el-icon-erp-shenhe"></svg-icon>
   		  </div>
   			<yd-cell-group>
 		        <yd-cell-item>
-		            <span slot="left">账号：</span>
-		            <yd-input slot="right"  v-model="userName" max="20" placeholder="请输入用户名"></yd-input>
+		            <!-- <span slot="left">账号 </span> -->
+		            <yd-input slot="right"  v-model="userName" max="20" placeholder="用户名/绑定手机号"></yd-input>
 		        </yd-cell-item>
 		        <yd-cell-item class='row-pwd'>
-		            <span slot="left">密码：{{author}}</span>
-		            <yd-input slot="right" type="password" v-model="userPwd" placeholder="请输入密码"></yd-input>
+		            <!-- <span slot="left">密码 {{author}}</span> -->
+		            <yd-input slot="right" type="password" v-model="userPwd" placeholder="登录密码"></yd-input>
 		        </yd-cell-item>
 		    </yd-cell-group>
-  		  <div  class="btn-login">
-		      <x-button  type="primary" @click.native="loginHandle">Token_Access</x-button>
-		      <x-button  type="primary" @click.native="createMenu">生成菜单(池)</x-button>
-		      <x-button  type="primary" @click.native="createMenuSingle">生成菜单(单笔)</x-button>
-		    </div>
 		    <div class="footer">
-		    	<span>忘记密码?</span>
-		    </div>
+				<yd-button size="large" type="primary" @click.native="handleLogin">登录</yd-button>
+				<div style="margin-top:20px;">
+					<span @click="handleReg">免费注册?</span>
+				</div>
+			</div>  
   	</form>
   </div>
 </template>
 
 <script>
-	import {  Group, XButton, XInput } from 'vux'
-	import * as index from '@/api/index'
+import * as index from '@/api/index'
 export default {
   name: 'login',
-  components: {
-      Group,
-      XInput,
-      XButton
-    },
   data () {
     return {
        userName: undefined,
        userPwd: undefined
     }
   },
-  computed: {
-      author () {
-//      return this.$store.state.author
-      }
-   },
+  created() {
+	  setTitle('登录')
+	  //this.loginHandle()
+	  //this.createMenu()
+	  //window.scrollTo(0, 0);
+  },
   methods: {
-		loginHandle() {
-			index.getObj(`/cgi-bin/token?grant_type=client_credential&appid=wx9e5cebeb227e21c0&secret=7330cc05f3eca43e0502d4e6dbcfbd3d`)
-			.then(response => {
-				this.access_token = response.data.access_token
-			})
-		},
-		createMenu() {
-			let locahost = `http://8h5842.natappfree.cc/?#`
-			let dataStrBox = `{
-									    "button": [
-									    		{
-									            "name": "首页", 
-									            "sub_button": [
-									                {
-									                    "type": "view", 
-									                    "name": "登录", 
-									                    "url": "${locahost}"
-									                }, 
-									                {
-													            "name": "总览", 
-													            "type": "view", 
-													            "url": "${locahost}/totalShowBox/receiveDetail"
-													        }
-									            ]
-									       },
-									        {
-									            "name": "融资管理", 
-									            "sub_button": [
-									                {
-									                    "type": "view", 
-									                    "name": "融资申请", 
-									                    "url": "${locahost}/financingManager/financingApply"
-									                }, 
-									                {
-									                    "type": "view", 
-									                    "name": "增量授信融资申请", 
-									                    "url": "${locahost}/financingManager/addCreditApply"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "融资签章(代申请)", 
-									                    "url": "${locahost}/financingManager/finaAgentApply"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "还款申请", 
-									                    "url": "${locahost}/financingManager/repayApply"
-									                }
-									            ]
-									        },
-									        {
-									            "name": "查询管理", 
-									            "sub_button": [
-									                {
-									                    "type": "view", 
-									                    "name": "融资查询", 
-									                    "url": "${locahost}/queryManager/financingQuery"
-									                }, 
-									                {
-									                    "type": "view", 
-									                    "name": "还款查询", 
-									                    "url": "${locahost}/queryManager/repayQuery"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "还款计划查询", 
-									                    "url": "${locahost}/queryManager/repayPlayQuery"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "尾款转出查询", 
-									                    "url": "${locahost}/queryManager/cashExportQuery"
-									                }
-									            ]
-									        }
-									    ]
-									}`
-			index.putObj(dataStrBox, `/cgi-bin/menu/create?access_token=${this.access_token}`)
-			.then(response => {
-				console.log('生成池菜单成功!')
-			})						 
-		},
-		createMenuSingle() {
-			let locahost = `http://8h5842.natappfree.cc/?#`
-			let dataStrSingle = `{
-									    "button": [
-									    		{
-									            "name": "首页", 
-									            "sub_button": [
-									                {
-									                    "type": "view", 
-									                    "name": "登录", 
-									                    "url": "${locahost}"
-									                }, 
-									                {
-													            "name": "总览", 
-													            "type": "view", 
-													            "url": "${locahost}/totalShowSingle/receiveDetail"
-													        }
-									            ]
-									       },
-									        {
-									            "name": "融资管理", 
-									            "sub_button": [
-									                {
-									                    "type": "view", 
-									                    "name": "融资申请", 
-									                    "url": "${locahost}/totalShowSingle/financingApply"
-									                }, 
-									                {
-									                    "type": "view", 
-									                    "name": "融资签章", 
-									                    "url": "${locahost}/totalShowSingle/finaAgentApply"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "还款申请", 
-									                    "url": "${locahost}/totalShowSingle/repayApply"
-									                }
-									            ]
-									        },
-									        {
-									            "name": "查询管理", 
-									            "sub_button": [
-									                {
-									                    "type": "view", 
-									                    "name": "融资查询", 
-									                    "url": "${locahost}/totalShowSingle/financingQuery"
-									                }, 
-									                {
-									                    "type": "view", 
-									                    "name": "还款查询", 
-									                    "url": "${locahost}/totalShowSingle/repayQuery"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "还款计划查询", 
-									                    "url": "${locahost}/totalShowSingle/repayPlayQuery"
-									                },
-									                {
-									                    "type": "view", 
-									                    "name": "尾款转出查询", 
-									                    "url": "${locahost}/totalShowSingle/cashExportQuery"
-									                }
-									            ]
-									        }
-									    ]
-									}`
-			index.putObj(dataStrSingle, `/cgi-bin/menu/create?access_token=${this.access_token}`)
-			.then(response => {
-				console.log('生成单笔菜单成功!')
-			})	
-		}
+	handleReg() {
+		this.$router.push('/register')
+	},
+	handleLogin() {
+		this.$router.push('/financing/loanApply/index')
+	},
+	loginHandle() {
+		console.log(3333)
+		// this.$HttpGet(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx9e5cebeb227e21c0&secret=7330cc05f3eca43e0502d4e6dbcfbd3d`).then(res => {
+
+		// })
+		// let _listParam = {
+		// 	grant_type: 'client_credential',
+		// 	appid: 'wx9e5cebeb227e21c0',
+		// 	secret: '7330cc05f3eca43e0502d4e6dbcfbd3d'
+		// }
+		index.getObj(`/cgi-bin/token?grant_type=client_credential&appid=wx9e5cebeb227e21c0&secret=7330cc05f3eca43e0502d4e6dbcfbd3d`)
+		.then(response => {
+			this.access_token = response.data.access_token
+		})
+	},
+	createMenu() {
+		this.access_token = '15_foSG1y8ZQbGmubclwDA_n28C1jJEOQJC_D9P5UPIUQiDpSJy1GRq_QU5T1ccoK-TJ_7xK0HcnmHCqGlVSXhtVeWpql6_N9hh4H1CRNKSrqPvalcc7fG69j1qvdHwUpN4DkzuFsSGGjQKmY_lQIIfAAALDD'
+		
+		let locahost = `http://vyr7z3.natappfree.cc/?#`
+		let dataStrBox = `{
+							"button": [
+								{
+									"name": "融资办理", 
+									"sub_button": [
+										{
+											"type": "view", 
+											"name": "融资申请", 
+											"url": "${locahost}/financing/loanApply/index"
+										},
+										{
+											"type": "view", 
+											"name": "还款申请", 
+											"url": "${locahost}/financing/repayApply/index"
+										},
+										{
+											"type": "view", 
+											"name": "待确认申请", 
+											"url": "${locahost}/financing/comfirmApply/index"
+										}
+									]
+								},
+								{
+									"name": "融资查询", 
+									"sub_button": [
+										{
+											"type": "view", 
+											"name": "融资查询", 
+											"url": "${locahost}/search/loan/index"
+										}, 
+										{
+											"type": "view", 
+											"name": "还款查询", 
+											"url": "${locahost}/search/repayment/index"
+										},
+										{
+											"type": "view", 
+											"name": "对账查询", 
+											"url": "${locahost}/search/account/index"
+										},
+										{
+											"type": "view", 
+											"name": "合同查询", 
+											"url": "${locahost}/search/contract/index"
+										}
+									]
+								},
+								{
+								 	"name": "配置管理", 
+								 	"sub_button": [
+								 		{
+								 			"type":"view",
+								 			"name":"登录",
+								 			"url": "${locahost}"
+								 		},
+								 		{
+								 			"type": "view", 
+								 			"name": "融资账号", 
+								 			"url": "${locahost}/config/account"
+								 		}, 
+										{
+								 			"type": "view", 
+								 			"name": "客户信息", 
+								 			"url": "${locahost}/config/customer"
+								 		}
+								 	]
+								 }
+							]
+						}`
+		
+		let _data = `{
+							"button": [{
+								 			"type":"view",
+								 			"name":"登录",
+								 			"url": "${locahost}"
+										 }]
+										 }`
+		index.putObj(dataStrBox, `/cgi-bin/menu/create?access_token=${this.access_token}`)
+		.then(response => {})						 
+	},
 	}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+	.footer {
+		padding-left: .24rem;
+	}
 </style>

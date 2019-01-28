@@ -1,0 +1,219 @@
+<template>
+	<!--融资申请-->
+  <div class="financing-apply">
+  	<yd-cell-group >
+  		<div class="card">
+  			<yd-cell-item class="card-title" arrow>
+	            <!-- <img slot="icon" src="http://static.ydcss.com/ydui/img/logo.png"> -->
+	            <span slot="left">待还款融资信息</span>
+	        </yd-cell-item>	   
+			<yd-cell-item>
+	            <span slot="left">融资单号</span>
+	            <span slot="right">LI20181022210045542837796</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">到账日期</span>
+	            <span slot="right">2018-10-22</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">还款方式</span>
+	            <span slot="right">到期还本</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">融资金额</span>
+	            <span slot="right">160,000.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">应还金额</span>
+	            <span slot="right">162,169.86</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">应还本金</span>
+	            <span slot="right">160,000.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">已还本金</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">应还利息</span>
+	            <span slot="right">1,578.08</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">已还利息</span>
+	            <span slot="right">1,578.08</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">应还费用</span>
+	            <span slot="right">591.78</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">应还利息</span>
+	            <span slot="right">1,578.08</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">已还费用</span>
+	            <span slot="right">591.78</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">剩余本金</span>
+	            <span slot="right">160,000.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">剩余利息</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">剩余费用</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">剩余应还</span>
+	            <span slot="right">160,000.00</span>
+	        </yd-cell-item>
+		</div>
+		<div class="card">
+  			<yd-cell-item class="card-title" arrow>
+	            <!-- <img slot="icon" src="http://static.ydcss.com/ydui/img/logo.png"> -->
+	            <span slot="left">还款申请</span>
+	        </yd-cell-item>	
+			<yd-cell-item>
+	            <span slot="left">融资到期日</span>
+	            <span slot="right">2018-12-06</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">实还日期</span>
+	            <span slot="right">2018-10-23</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">到期费用</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">实还费用</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">到期利息</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">实还利息</span>
+	            <span slot="right">0.00</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">融资天数</span>
+	            <span slot="right">45</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">实际天数</span>
+	            <span slot="right">1</span>
+	        </yd-cell-item>
+			<yd-cell-item>
+	            <span slot="left">到期应还</span>
+	            <span slot="right">160,000.00</span>
+	        </yd-cell-item>
+			<yd-cell-item class="input-text">
+	            <span slot="left"><span class="color-red">*</span>实还本金</span>
+	            <yd-input slot="right"  v-model="form.repayPrincipal" placeholder="请输入实还本金" ></yd-input>
+	        </yd-cell-item>
+		</div>
+  	</yd-cell-group>
+	<div>
+		<yd-button size="large" type="primary" @click.native="saveApply">提交</yd-button>
+	</div>   
+  </div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			form: {
+				repayPrincipal: '',
+			},
+			isFlag: true,
+			start1: false,
+			verifyCode: undefined,
+			show2: false,
+			oneList: {
+				one: '2018-01-10',
+				two: '1234567'
+			},
+			twoLists: [{
+				one: '7.50',
+				two: '卖方',
+				three: '后付'
+			}],
+			threeLists: [{
+				one: '卖方保理费',
+				two: '卖方',
+				three: '后付',
+				four: '比例',
+				five: '1.00'
+			}],
+			actions: [
+			{
+				name: '按季付息到期还本',
+				method: ''
+			},
+			{
+				name: '按月付息到期还本',
+				method: ''
+			},
+			{
+				name: '利随本清',
+				method: ''
+			}],
+			second: 10,  // 计时
+			isSecond: true,
+		}
+	},
+  created() {
+	  setTitle('申请还款')
+  },
+  methods: {
+  	saveApply() {
+		if (this.form.repayPrincipal == '') {
+			this.$dialog.toast({mes: '请输入实还本金金额！'})
+			this.isFlag = false
+			return false
+		}
+
+		if (this.isFlag) {
+			this.$router.push('/financing/repayApply/index')
+		}
+		console.log(222)
+		
+	},
+	clickContract() {
+	window.open(`http://10.0.4.23:8760/api/baoli/contract/previewTempContractFile/LOAN_CONTRACT-20181022210121-530be436-9148-459b-a677-8cdcfe0ac47c.pdf/LOAN_CONTRACT`)
+	},
+	getValidateCode() { // 获取验证码
+        this.$dialog.loading.open('发送中...');
+		setTimeout(() => {
+
+			this.start1 = true;
+			this.$dialog.loading.close();
+
+			this.$dialog.toast({
+				mes: '已发送',
+				icon: 'success',
+				timeout: 1500
+			});
+
+		}, 1000);
+	},
+  }
+
+}
+
+</script>
+
+
+
+<style rel="stylesheet/scss" lang="scss" scoped="scoped" >
+	.contract {
+		padding: 0.2rem;
+		text-align: center;
+	}
+</style>

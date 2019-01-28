@@ -1,0 +1,92 @@
+<template>
+	<!--融资签章代申请-->
+  <div class="financing-apply">
+  	<yd-cell-group>
+	  	<div>
+	  		<yd-search v-model="value" :on-submit="submitHandler"  placeholder="融资申请单号" cancel-text=""></yd-search>
+	  	</div>
+	  	<div class="page-actionsheet">
+			<ul class="tab-ul">
+	      		<li  class="tab-ul-li" @click="intoContract">
+					<div class="financing-list">
+						<div class="title">
+							<div><span>LI20181022210045542837796</span></div>
+							<div class="color-green"><span>未融资</span></div>
+						</div>
+						<div>
+							<div class="color-grey"><icon name="applyFinanice" scale="2.3" class="icon-finanice"></icon><span>申请金额</span></div>
+							<div class="price"><span>￥160,000.00</span></div>
+						</div>
+						<div>
+							<div class="text">
+								<div class="color-grey"><span>年华利率</span></div>
+								<div><span>10.00%</span></div>
+							</div>
+							<div class="text">
+								<div class="color-grey"><span>申请日期</span></div>
+								<div><span>2018-10-22</span></div>
+							</div>
+						</div>
+					</div>
+	      		</li>
+				<li  class="tab-ul-li" @click="intoContract">
+					<div class="financing-list">
+						<div class="title">
+							<div><span>LI20181022210045542837795</span></div>
+							<div class="color-green"><span>未融资</span></div>
+						</div>
+						<div>
+							<div class="color-grey"><icon name="applyFinanice" scale="2.3" class="icon-finanice"></icon><span>申请金额</span></div>
+							<div class="price"><span>￥160,000.00</span></div>
+						</div>
+						<div>
+							<div class="text">
+								<div class="color-grey"><span>年华利率</span></div>
+								<div><span>10.00%</span></div>
+							</div>
+							<div class="text">
+								<div class="color-grey"><span>申请日期</span></div>
+								<div><span>2018-10-22</span></div>
+							</div>
+						</div>
+					</div>
+	      		</li>
+	       </ul>
+	  	</div>
+  	</yd-cell-group>
+  </div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			data: {
+				one: '13,000.00',
+				two: '12,820.00	'
+			},
+		}
+	},
+  created() {
+	  setTitle('待确认申请')
+	  this.pageScrollTo()
+  },
+  methods: {
+  	submitHandler(value) {
+        this.$dialog.toast({mes: `搜索：${value}`});
+	},
+	intoContract() {
+		this.$router.push('/financing/comfirmApply/contract')
+	},
+	pageScrollTo() {
+      window.scrollTo(0, 0);
+    }
+  }
+
+}
+
+</script>
+
+
+
+<style rel="stylesheet/scss" lang="scss" scoped="scoped" >
+</style>

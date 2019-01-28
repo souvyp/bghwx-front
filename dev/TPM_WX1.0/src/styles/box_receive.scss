@@ -1,0 +1,99 @@
+.receive-detail,.financing-apply {
+    .icon-finanice{
+		padding-right: 10px;
+		fill: #ffb400;
+		vertical-align: bottom;
+	}
+    .color-grey {
+        color: #888;
+    }
+    .color-green {
+        color: #04be02;
+    }
+    .mint-button--small {
+        padding: 0;
+        width: 32%;
+        height: 35px;
+    }
+    .tab-ul-li-list {
+        margin: 11px 15px;
+        border-radius: 15px;
+    }
+    .tab-ul-li {
+        list-style: none;
+        background: #fff;
+        padding: 11px 15px;
+        margin-bottom: 10px;
+        border: 1px solid #fff;
+        .li-row {
+            height: 35px;
+            line-height: 35px;
+        }
+        .li-title {
+            border-bottom: 1px solid #fcf9fe;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            .date {
+                color: #a9a9a9;
+                font-size: 0.26rem;
+            }
+        }
+        .cell-right {
+            float: right;
+            color: #888;
+        }
+    }
+    .footer {
+        margin: 0 10px;
+    }
+    .yd-checkbox-icon {
+		margin-bottom: 2px;
+    }
+    .title-top {
+        background: #04be02;
+        color: #fff;
+        margin-bottom: 10px;
+		text-align: center;
+		padding: 40px 0;
+		letter-spacing: 3px;
+		.price {
+			font-size: 0.8rem;
+		}
+		.color-red {
+			margin: 0;
+		}
+		.bottom { 
+			letter-spacing: 0;
+		}
+    }
+    .input-money {
+        .yd-cell-left {
+            color: #5bbf12;
+            font-size: 0.7rem;
+        }
+        .yd-cell-right input{
+            font-size: 0.5rem;
+            color: #5bbf12;
+        }
+    }
+    .yd-checkbox-icon {
+        z-index: 0;
+    }
+    .financing-list {
+        .title, .content, .text {
+            display: inline-flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .title {
+            border-bottom: 1px solid #fcf9fe;
+            padding-bottom: 10px;
+        }
+        .price {
+            color: #04be02;
+            font-size: 0.55rem;
+        }
+    }
+}
